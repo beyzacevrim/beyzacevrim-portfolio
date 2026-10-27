@@ -132,6 +132,7 @@ export default {
       'Ich arbeite an allen Teilen eines Projekts: an dem, was Sie auf dem Bildschirm sehen, und an allem, was im Hintergrund läuft. So haben Sie eine Ansprechperson, die das Ganze im Blick hat.',
       'Neben der Projektarbeit interessiert mich, wie Computer aus Daten lernen und clevere Lösungen für komplexe Probleme finden – darum geht es auch in meiner akademischen Arbeit.',
     ],
+    photoAlt: 'Porträt von Beyza Çevrim',
     spokenTitle: 'Sprachen',
     spoken: [
       'Türkisch — Muttersprache',

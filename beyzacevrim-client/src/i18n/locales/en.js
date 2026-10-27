@@ -132,6 +132,7 @@ export default {
       'I work on every part of a project: what you see on the screen, and everything that runs behind it. So you have one person who understands the whole picture.',
       "Outside of project work, I'm curious about how computers learn from data and find smart answers to complex problems — which is also the focus of my academic work.",
     ],
+    photoAlt: 'Portrait of Beyza Çevrim',
     spokenTitle: 'Languages',
     spoken: [
       'Turkish — native',

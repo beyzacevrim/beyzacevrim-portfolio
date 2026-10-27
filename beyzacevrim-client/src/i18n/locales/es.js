@@ -132,6 +132,7 @@ export default {
       'Trabajo en todas las partes de un proyecto: lo que ves en pantalla y todo lo que funciona por detrás. Así tienes una sola persona que entiende el proyecto completo.',
       'Fuera del trabajo en proyectos, me interesa cómo los ordenadores aprenden de los datos y encuentran soluciones inteligentes a problemas complejos, que es también el foco de mi trabajo académico.',
     ],
+    photoAlt: 'Retrato de Beyza Çevrim',
     spokenTitle: 'Idiomas',
     spoken: [
       'Turco — nativo',

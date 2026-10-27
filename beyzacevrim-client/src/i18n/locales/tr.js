@@ -131,6 +131,7 @@ export default {
       'Bir projenin her parçası üzerinde çalışıyorum: ekranda gördükleriniz ve onların arkasında çalışan her şey. Böylece işin tamamını bilen tek bir muhatabınız oluyor.',
       'Proje işlerinin dışında, bilgisayarların veriden nasıl öğrendiğini ve karmaşık problemlere nasıl akıllı çözümler bulduğunu merak ediyorum; akademik çalışmalarım da bu konular üzerine.',
     ],
+    photoAlt: "Beyza Çevrim'in portresi",
     spokenTitle: 'Konuştuğum diller',
     spoken: [
       'Türkçe — ana dil',
