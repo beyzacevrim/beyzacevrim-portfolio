@@ -41,8 +41,8 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8" aria-label={t.nav.main}>
-        <Link to="/" className="group flex shrink-0 items-center gap-2 font-display text-lg font-bold tracking-tight">
-          <span className="size-3 rounded-full bg-orange transition-transform duration-300 group-hover:scale-150" aria-hidden="true" />
+        <Link to="/" className="group flex shrink-0 items-center gap-2.5 font-display text-xl font-bold tracking-tight sm:text-2xl">
+          <span className="size-3.5 rounded-full bg-orange transition-transform duration-300 group-hover:scale-150" aria-hidden="true" />
           {profile.name}
         </Link>
 
