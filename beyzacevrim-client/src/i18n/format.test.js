@@ -45,6 +45,6 @@ describe('term', () => {
 describe('plainHeadline', () => {
   it('joins the headline parts and ends with a period', () => {
     assert.equal(plainHeadline(locales.en), 'I build things that make ideas work.')
-    assert.equal(plainHeadline(locales.tr), 'Fikirleri hayata geçiren şeyler geliştiriyorum.')
+    assert.equal(plainHeadline(locales.tr), 'Fikirleri hayata geçiren yazılımlar geliştiriyorum.')
   })
 })

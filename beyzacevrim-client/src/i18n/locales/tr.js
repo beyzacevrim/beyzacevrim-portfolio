@@ -25,7 +25,7 @@ export default {
   hero: {
     role: 'Bilgisayar Mühendisi · Web Geliştirici',
     badge: 'BİLGİSAYAR MÜHENDİSİ • WEB GELİŞTİRİCİ • ',
-    headline: { before: '', highlight: 'Fikirleri', after: ' hayata geçiren şeyler geliştiriyorum' },
+    headline: { before: '', highlight: 'Fikirleri', after: ' hayata geçiren yazılımlar geliştiriyorum' },
     intro:
       'Merhaba, ben Beyza. İşletmeler ve kurumlar için web siteleri ve web uygulamaları geliştiriyorum. Aklınızdakini bana anlatın — teknik bilgi gerekmez — birlikte onu çalışan bir ürüne dönüştürelim.',
     ctaPrimary: 'Fikrinizi konuşalım',
