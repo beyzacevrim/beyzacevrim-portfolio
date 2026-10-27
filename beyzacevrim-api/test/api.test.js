@@ -5,21 +5,21 @@ import { setTestEnv, startServer, validMessage } from './helpers.js';
 setTestEnv();
 const { default: app } = await import('../src/app.js');
 
-// The database is intentionally never connected here, which also covers the
-// "API up, database down" behaviour.
-describe('API without a database connection', () => {
+// Mail is intentionally not configured here, which also covers the
+// "API up, contact form disabled" behaviour. Sending is tested in mail.test.js.
+describe('API without mail settings', () => {
   let server;
   before(async () => {
     server = await startServer(app);
   });
   after(() => server.close());
 
-  it('GET /api/health reports ok and a disconnected database', async () => {
+  it('GET /api/health reports ok and unconfigured mail', async () => {
     const { status, json } = await server.request('/api/health');
     assert.equal(status, 200);
     assert.equal(json.success, true);
     assert.equal(json.data.status, 'ok');
-    assert.equal(json.data.database, 'disconnected');
+    assert.equal(json.data.mail, 'not configured');
   });
 
   it('unknown routes return a JSON 404', async () => {
@@ -44,7 +44,7 @@ describe('API without a database connection', () => {
     assert.deepEqual(Object.keys(json.error.details).sort(), ['body', 'email', 'locale', 'message', 'name']);
   });
 
-  it('a valid message returns 503 while the database is unavailable', async () => {
+  it('a valid message returns 503 while mail is not configured', async () => {
     const { status, json } = await server.request('/api/contact', { method: 'POST', body: { ...validMessage, locale: 'tr' } });
     assert.equal(status, 503);
     assert.equal(json.error.code, 'SERVICE_UNAVAILABLE');

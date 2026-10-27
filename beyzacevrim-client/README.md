@@ -25,8 +25,8 @@ npm test               # node:test: locale completeness, content policy, formatt
 - `src/utils/terminalCommands.js`: terminal command definitions.
 - `src/services/`: API client (only the contact form talks to the API).
 
-The site renders without the API. Only the contact form needs `beyzacevrim-api` and MongoDB.
+The site renders without the API. Only the contact form needs `beyzacevrim-api`, which emails the messages.
 
 ## Deployment
 
-See `beyzacevrim-api/DEPLOYMENT.md`. The built client is served by Nginx on the same domain as the API, so `VITE_API_URL` stays empty in production. `/solutions/:slug` uses client-side routing, so the server falls back to `index.html`; the Nginx template already does this.
+See `beyzacevrim-api/DEPLOYMENT.md`. On Vercel the site and the API are separate projects, so `VITE_API_URL` is set to the API's address. `/solutions/:slug` uses client-side routing; `vercel.json` falls back to `index.html`.

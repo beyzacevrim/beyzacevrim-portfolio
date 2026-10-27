@@ -34,6 +34,13 @@ describe('validateContact', () => {
     assert.ok(validateContact({ ...validMessage, subject: 'x'.repeat(151) }).errors.subject);
   });
 
+  it('rejects line breaks in fields used for the email subject line', () => {
+    const { errors } = validateContact({ ...validMessage, name: 'Test\nBcc: x@example.com', subject: 'Hi\r\nthere' });
+    assert.ok(errors.name);
+    assert.ok(errors.subject);
+    assert.deepEqual(validateContact({ ...validMessage, message: 'Line one\nline two' }).errors, {});
+  });
+
   it('subject is optional', () => {
     const { subject, ...withoutSubject } = validMessage;
     assert.equal(subject, 'Hello');

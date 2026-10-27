@@ -1,89 +1,45 @@
 # Deployment
 
-Production setup for the whole portfolio on one Linux server (e.g. Ubuntu):
+The portfolio runs on Vercel as two projects from the same GitHub repository:
 
-- **Nginx** serves the built client (`beyzacevrim-client/dist`) and forwards `/api/*` to the API.
-- **PM2** keeps the API (`beyzacevrim-api`) running on `127.0.0.1:5050`.
-- **MongoDB** stores contact form messages and listens on localhost only.
+| Project | Root Directory | Address |
+| ------- | -------------- | ------- |
+| Site    | `beyzacevrim-client` | `https://beyzacevrim.vercel.app` |
+| API     | `beyzacevrim-api`    | e.g. `https://beyzacevrim-api.vercel.app` |
 
-Client and API share one domain, so the browser calls `/api/...` on the same origin.
+Contact form messages are emailed through [Resend](https://resend.com). Nothing is stored.
 
-Replace `example.com` with the real domain throughout.
+## 1. Resend
 
-## 1. Server prerequisites
+1. Sign up at resend.com with the address that should receive the messages.
+2. **API Keys → Create API Key**, permission "Sending access". Copy the key (`re_...`); it is shown once.
 
-- Node.js 20 or newer, npm
-- MongoDB (bound to `127.0.0.1`, ideally with authentication enabled)
-- Nginx, Certbot
-- PM2: `sudo npm install -g pm2`
+Without a verified domain, Resend sends from `onboarding@resend.dev` and only delivers to the account's own address. That is enough here, because every message goes to the site owner. With an own domain later, verify it in Resend and set `CONTACT_FROM_EMAIL`.
 
-## 2. API
+## 2. API project on Vercel
 
-```bash
-cd /var/www/beyzacevrim-api
-npm ci --omit=dev
-cp .env.example .env
-```
-
-Edit `.env`:
+**Add New → Project**, import the repository, set **Root Directory** to `beyzacevrim-api`, and add these **Environment Variables** before deploying:
 
 ```dotenv
 NODE_ENV=production
-PORT=5050
-MONGODB_URI=mongodb://<user>:<password>@127.0.0.1:27017/beyzacevrim-portfolio?authSource=admin
-CORS_ORIGINS=https://example.com,https://www.example.com
+CORS_ORIGINS=https://beyzacevrim.vercel.app
 TRUST_PROXY=true
-CONTACT_RATE_LIMIT_MAX=5
+RESEND_API_KEY=re_...
+CONTACT_TO_EMAIL=<the Resend account's email>
 ```
 
-- `CORS_ORIGINS` must contain the site's own address. Browsers send an `Origin` header on form submissions even on the same domain.
-- `TRUST_PROXY=true` lets rate limiting see real visitor IPs behind Nginx.
+`api/index.js` exports the Express app and `vercel.json` routes `/api/*` to it. After deploying, `https://<api-address>/api/health` should return `"mail": "configured"`.
 
-Start it and make it survive reboots:
+## 3. Site project
 
-```bash
-pm2 start ecosystem.config.cjs --env production
-pm2 save
-pm2 startup        # run the command it prints
-curl http://127.0.0.1:5050/api/health
-```
+In the site project: **Settings → Environment Variables** → `VITE_API_URL=https://<api-address>` (no trailing slash), then **Deployments → ⋯ → Redeploy**. Vite reads the variable at build time, so a redeploy is required.
 
-## 3. Client
+## Notes
 
-Build on the server (or locally, then upload `dist/`):
+- Changing an environment variable needs a redeploy of that project.
+- Rate limiting is kept in memory per running instance. On Vercel it is a soft limit, not a guarantee.
+- Preview deployments of the site have different addresses; the form works there only if that address is added to `CORS_ORIGINS`.
 
-```bash
-cd /var/www/beyzacevrim-client
-npm ci
-npm run build      # VITE_API_URL stays empty: the API is on the same domain
-```
+## Own server (alternative)
 
-## 4. Nginx and HTTPS
-
-Use [deploy/nginx.conf.example](deploy/nginx.conf.example). Its comments list the commands to enable the site and to add HTTPS with Certbot.
-
-Check afterwards:
-
-- `https://example.com` loads the site.
-- `https://example.com/solutions/websites` loads directly (not a 404).
-- `https://example.com/api/health` returns `"database": "connected"`.
-- Sending the contact form shows the success message.
-
-## Reading messages
-
-```bash
-cd /var/www/beyzacevrim-api
-npm run messages                 # latest 20
-npm run messages -- --limit 50 --full
-```
-
-## Updating
-
-```bash
-# API
-git pull && npm ci --omit=dev && pm2 reload beyzacevrim-api
-# Client
-git pull && npm ci && npm run build
-```
-
-Logs: `pm2 logs beyzacevrim-api`. They are JSON lines and never contain message contents or credentials.
+The API also runs as a normal Node process: `npm ci --omit=dev`, fill `.env`, then `pm2 start ecosystem.config.cjs --env production`. [deploy/nginx.conf.example](deploy/nginx.conf.example) serves the built client and proxies `/api` on one domain; in that setup `VITE_API_URL` stays empty and `CORS_ORIGINS` is the site's own address.

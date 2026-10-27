@@ -1,4 +1,4 @@
-import config, { assertConfig } from './config/env.js';
+import config, { assertConfig, isMailConfigured } from './config/env.js';
 import logger from './utils/logger.js';
 
 try {
@@ -9,7 +9,6 @@ try {
 }
 
 const { default: app } = await import('./app.js');
-const { connectDatabase, disconnectDatabase } = await import('./config/db.js');
 
 // Express 5 passes listen errors (e.g. EADDRINUSE) to this callback.
 const server = app.listen(config.port, (err) => {
@@ -18,17 +17,13 @@ const server = app.listen(config.port, (err) => {
     process.exit(1);
   }
   logger.info('API listening', { port: config.port, env: config.nodeEnv });
+  // The server still starts so the site works; only contact submissions return 503.
+  if (!isMailConfigured()) logger.warn('RESEND_API_KEY or CONTACT_TO_EMAIL missing; contact form disabled');
 });
-
-// The HTTP server starts regardless; the database connects (and retries) in the background.
-connectDatabase();
 
 const shutdown = (signal) => {
   logger.info('Shutting down', { signal });
-  server.close(async () => {
-    await disconnectDatabase();
-    process.exit(0);
-  });
+  server.close(() => process.exit(0));
   setTimeout(() => process.exit(1), 10000).unref();
 };
 

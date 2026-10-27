@@ -3,7 +3,7 @@
 Personal portfolio site in English, Turkish, Spanish and German.
 
 - [`beyzacevrim-client/`](beyzacevrim-client) — React + Vite + Tailwind site
-- [`beyzacevrim-api/`](beyzacevrim-api) — Express + MongoDB API for the contact form
+- [`beyzacevrim-api/`](beyzacevrim-api) — Express API that emails contact form messages (Resend)
 
 ## Local development
 
@@ -12,8 +12,7 @@ cd beyzacevrim-api && npm install && cp .env.example .env && npm run dev
 cd beyzacevrim-client && npm install && npm run dev
 ```
 
-## Deploying the site on Vercel
+## Deploying
 
-Import this repository on Vercel and set **Root Directory** to `beyzacevrim-client`.
-Vercel detects Vite automatically (`npm run build`, output `dist`).
-Set `VITE_API_URL` to the public API address once the API is deployed.
+Both parts run on Vercel as separate projects from this repository (Root Directory `beyzacevrim-client` and `beyzacevrim-api`).
+Step by step: [beyzacevrim-api/DEPLOYMENT.md](beyzacevrim-api/DEPLOYMENT.md).

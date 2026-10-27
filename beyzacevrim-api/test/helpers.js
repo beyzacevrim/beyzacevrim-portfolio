@@ -3,7 +3,8 @@
 export function setTestEnv(overrides = {}) {
   Object.assign(process.env, {
     NODE_ENV: 'test',
-    MONGODB_URI: 'mongodb://127.0.0.1:1/never-connected',
+    RESEND_API_KEY: '',
+    CONTACT_TO_EMAIL: '',
     CORS_ORIGINS: 'http://localhost:5173',
     CONTACT_RATE_LIMIT_MAX: '1000',
     ...overrides,
