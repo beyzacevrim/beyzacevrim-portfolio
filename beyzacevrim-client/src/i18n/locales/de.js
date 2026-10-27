@@ -26,7 +26,7 @@ export default {
   hero: {
     role: 'Computer Engineering · Webentwicklung',
     badge: 'COMPUTER ENGINEERING • WEBENTWICKLUNG • ',
-    headline: { before: 'Ich baue Dinge, die ', highlight: 'Ideen', after: ' zum Laufen bringen' },
+    headline: { before: 'Ich entwickle Software, die ', highlight: 'Ideen', after: ' zum Leben erweckt' },
     intro:
       'Hallo, ich bin Beyza. Ich entwickle Websites und Webanwendungen für Unternehmen und Organisationen. Erzählen Sie mir, was Sie vorhaben – ganz ohne Technikwissen – und gemeinsam machen wir daraus etwas, das funktioniert.',
     ctaPrimary: 'Über Ihre Idee sprechen',

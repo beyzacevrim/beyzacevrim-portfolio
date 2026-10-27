@@ -26,7 +26,7 @@ export default {
   hero: {
     role: 'Computer Engineer · Web Developer',
     badge: 'COMPUTER ENGINEER • WEB DEVELOPER • ',
-    headline: { before: 'I build things that make ', highlight: 'ideas', after: ' work' },
+    headline: { before: 'I build software that brings ', highlight: 'ideas', after: ' to life' },
     intro:
       "Hi, I'm Beyza. I build websites and web applications for businesses and organizations. Tell me what you have in mind — no technical knowledge needed — and let's turn it into something that works.",
     ctaPrimary: "Let's talk about your idea",

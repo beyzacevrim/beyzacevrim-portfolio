@@ -26,7 +26,7 @@ export default {
   hero: {
     role: 'Ingeniería Informática · Desarrollo Web',
     badge: 'INGENIERÍA INFORMÁTICA • DESARROLLO WEB • ',
-    headline: { before: 'Construyo cosas que hacen que las ', highlight: 'ideas', after: ' funcionen' },
+    headline: { before: 'Desarrollo software que convierte las ', highlight: 'ideas', after: ' en realidad' },
     intro:
       'Hola, soy Beyza. Creo sitios y aplicaciones web para empresas y organizaciones. Cuéntame lo que tienes en mente — no hace falta saber nada técnico — y lo convertimos juntos en algo que funcione.',
     ctaPrimary: 'Hablemos de tu idea',
