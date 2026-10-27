@@ -30,7 +30,7 @@ export default {
       'Merhaba, ben Beyza. İşletmeler ve kurumlar için web siteleri ve web uygulamaları geliştiriyorum. Aklınızdakini bana anlatın — teknik bilgi gerekmez — birlikte onu çalışan bir ürüne dönüştürelim.',
     ctaPrimary: 'Fikrinizi konuşalım',
     ctaSecondary: 'Neler yapabileceğime göz atın',
-    sticker: 'fikir → ürün',
+    photoAlt: "Beyza Çevrim'in portresi",
     marquee: ['Web siteleri', 'Web uygulamaları', 'Online platformlar', 'İş araçları', 'Bağlantılı servisler'],
   },
   solutions: {
@@ -131,7 +131,6 @@ export default {
       'Bir projenin her parçası üzerinde çalışıyorum: ekranda gördükleriniz ve onların arkasında çalışan her şey. Böylece işin tamamını bilen tek bir muhatabınız oluyor.',
       'Proje işlerinin dışında, bilgisayarların veriden nasıl öğrendiğini ve karmaşık problemlere nasıl akıllı çözümler bulduğunu merak ediyorum; akademik çalışmalarım da bu konular üzerine.',
     ],
-    photoAlt: "Beyza Çevrim'in portresi",
     spokenTitle: 'Konuştuğum diller',
     spoken: [
       'Türkçe — ana dil',

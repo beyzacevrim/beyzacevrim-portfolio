@@ -1,4 +1,5 @@
 import { ArrowDown, MessageCircle } from 'lucide-react'
+import portrait from '../assets/beyza-cevrim.webp'
 import useI18n from '../hooks/useI18n.js'
 
 // Circumference of the badge's text circle (r = 38).
@@ -20,24 +21,6 @@ function RotatingBadge({ text, className = '' }) {
         </text>
       </svg>
       <span className="font-serif text-4xl italic">BÇ</span>
-    </div>
-  )
-}
-
-function CodeCard() {
-  return (
-    // Code is not translated; lang="en" also keeps uppercase file names out of Turkish casing (i → İ).
-    <div lang="en" className="grain relative overflow-hidden rounded-[2rem] bg-cobalt p-6 text-cream shadow-[8px_8px_0_0_var(--color-ink)] sm:p-7">
-      <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-cream/90">idea.js</p>
-      <pre className="font-mono text-sm leading-7 sm:text-[15px]">
-        <code>
-          <span className="text-lime">const</span> idea = <span className="font-semibold italic">'yours'</span>
-          {'\n'}
-          <span className="text-lime">const</span> app = <span className="font-semibold underline decoration-lime decoration-2 underline-offset-4">build</span>(idea)
-          {'\n\n'}
-          app.<span className="font-semibold underline decoration-lime decoration-2 underline-offset-4">works</span>() <span className="text-cream/90">// true</span>
-        </code>
-      </pre>
     </div>
   )
 }
@@ -112,13 +95,17 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative lg:col-span-4 lg:pt-28">
+        <div className="relative pb-10 lg:col-span-4 lg:pt-16 lg:pb-0">
           <div className="relative mx-auto max-w-sm lg:rotate-2">
-            <CodeCard />
-            <RotatingBadge text={t.hero.badge} className="absolute -right-4 -bottom-16 sm:-right-8" />
-            <div className="absolute -top-6 right-6 rotate-6 rounded-xl border-2 border-ink bg-lime px-3 py-1.5 font-mono text-xs font-semibold shadow-[3px_3px_0_0_var(--color-ink)]">
-              {t.hero.sticker}
-            </div>
+            <img
+              src={portrait}
+              alt={t.hero.photoAlt}
+              width="720"
+              height="762"
+              fetchPriority="high"
+              className="w-full rounded-[2rem] border-2 border-ink object-cover shadow-[8px_8px_0_0_var(--color-ink)]"
+            />
+            <RotatingBadge text={t.hero.badge} className="absolute -right-4 -bottom-12 sm:-right-8" />
           </div>
         </div>
       </div>

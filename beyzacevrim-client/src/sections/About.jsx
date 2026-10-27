@@ -1,5 +1,4 @@
 import { Briefcase, GraduationCap, Languages, Sparkles } from 'lucide-react'
-import portrait from '../assets/beyza-cevrim.webp'
 import Reveal from '../components/Reveal.jsx'
 import SectionHeader from '../components/SectionHeader.jsx'
 import Tag from '../components/Tag.jsx'
@@ -23,15 +22,6 @@ export default function About() {
 
         <div className="mt-14 grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-5">
-            <img
-              src={portrait}
-              alt={t.about.photoAlt}
-              width="720"
-              height="762"
-              loading="lazy"
-              decoding="async"
-              className="mb-10 w-full max-w-xs -rotate-2 rounded-3xl border-2 border-ink object-cover shadow-[8px_8px_0_0_var(--color-orange)] sm:max-w-sm"
-            />
             <div className="space-y-5 text-lg leading-relaxed text-ink/80">
               {t.about.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

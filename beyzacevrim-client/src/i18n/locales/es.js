@@ -31,7 +31,7 @@ export default {
       'Hola, soy Beyza. Creo sitios y aplicaciones web para empresas y organizaciones. Cuéntame lo que tienes en mente — no hace falta saber nada técnico — y lo convertimos juntos en algo que funcione.',
     ctaPrimary: 'Hablemos de tu idea',
     ctaSecondary: 'Ver lo que puedo crear',
-    sticker: 'idea → producto',
+    photoAlt: 'Retrato de Beyza Çevrim',
     marquee: ['Sitios web', 'Aplicaciones web', 'Plataformas online', 'Herramientas de negocio', 'Servicios conectados'],
   },
   solutions: {
@@ -132,7 +132,6 @@ export default {
       'Trabajo en todas las partes de un proyecto: lo que ves en pantalla y todo lo que funciona por detrás. Así tienes una sola persona que entiende el proyecto completo.',
       'Fuera del trabajo en proyectos, me interesa cómo los ordenadores aprenden de los datos y encuentran soluciones inteligentes a problemas complejos, que es también el foco de mi trabajo académico.',
     ],
-    photoAlt: 'Retrato de Beyza Çevrim',
     spokenTitle: 'Idiomas',
     spoken: [
       'Turco — nativo',

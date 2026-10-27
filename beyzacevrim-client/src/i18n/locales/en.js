@@ -31,7 +31,7 @@ export default {
       "Hi, I'm Beyza. I build websites and web applications for businesses and organizations. Tell me what you have in mind — no technical knowledge needed — and let's turn it into something that works.",
     ctaPrimary: "Let's talk about your idea",
     ctaSecondary: 'See what I can build',
-    sticker: 'idea → product',
+    photoAlt: 'Portrait of Beyza Çevrim',
     marquee: ['Websites', 'Web applications', 'Online platforms', 'Business tools', 'Connected services'],
   },
   solutions: {
@@ -132,7 +132,6 @@ export default {
       'I work on every part of a project: what you see on the screen, and everything that runs behind it. So you have one person who understands the whole picture.',
       "Outside of project work, I'm curious about how computers learn from data and find smart answers to complex problems — which is also the focus of my academic work.",
     ],
-    photoAlt: 'Portrait of Beyza Çevrim',
     spokenTitle: 'Languages',
     spoken: [
       'Turkish — native',
