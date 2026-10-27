@@ -9,7 +9,7 @@ const unavailable = () =>
   ApiError.serviceUnavailable('Messages cannot be received right now. Please try again later.');
 
 // Plain text only, so visitor input is never interpreted as HTML in the inbox.
-export function buildEmail({ name, email, subject, message, locale }) {
+export function buildEmail({ name, email, phone, subject, message, locale }) {
   return {
     from: config.mail.from,
     to: [config.mail.to],
@@ -18,6 +18,7 @@ export function buildEmail({ name, email, subject, message, locale }) {
     text: [
       `Name: ${name}`,
       `Email: ${email}`,
+      phone ? `Phone: ${phone}` : null,
       `Site language: ${LANGUAGE_NAMES[locale] || locale}`,
       subject ? `Subject: ${subject}` : null,
       '',

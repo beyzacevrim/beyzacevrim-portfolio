@@ -269,6 +269,7 @@ export default {
     form: {
       name: 'Name',
       email: 'Email',
+      phone: 'Phone',
       subject: 'Subject',
       message: 'Message',
       optional: 'optional',
@@ -282,6 +283,7 @@ export default {
     errors: {
       name: 'Please enter your name (2–100 characters).',
       email: 'Please enter a valid email address.',
+      phone: 'Please enter a valid phone number, or leave it empty.',
       subject: 'Subject must be at most 150 characters.',
       message: 'Message must be between 10 and 5000 characters.',
       network: 'Could not reach the server. Please try again later.',

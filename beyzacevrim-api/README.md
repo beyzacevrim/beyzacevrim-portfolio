@@ -23,7 +23,7 @@ Leave `RESEND_API_KEY` empty to run without sending mail; the contact form then 
 | Method | Path           | Description |
 | ------ | -------------- | ----------- |
 | GET    | `/api/health`  | API status and whether mail is configured |
-| POST   | `/api/contact` | Email a contact message `{ name, email, subject?, message, locale? }` (`locale`: `en`, `tr`, `es` or `de`) |
+| POST   | `/api/contact` | Email a contact message `{ name, email, phone?, subject?, message, locale? }` (`locale`: `en`, `tr`, `es` or `de`) |
 
 Responses use `{ "success": true, "data": … }` or `{ "success": false, "error": { "code", "message", "details?" } }`.
 

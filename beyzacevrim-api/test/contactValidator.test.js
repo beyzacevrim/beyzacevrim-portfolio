@@ -41,6 +41,18 @@ describe('validateContact', () => {
     assert.deepEqual(validateContact({ ...validMessage, message: 'Line one\nline two' }).errors, {});
   });
 
+  it('accepts common phone formats and an empty phone', () => {
+    for (const phone of ['', '+90 555 123 45 67', '0555 123 45 67', '+1 (415) 555-0100', '030.1234567']) {
+      assert.deepEqual(validateContact({ ...validMessage, phone }).errors, {}, phone);
+    }
+  });
+
+  it('rejects invalid phone numbers', () => {
+    for (const phone of ['12345', 'call me', '+90 555 abc', '1'.repeat(16), '+90\n555 123 45 67', 5551234567]) {
+      assert.ok(validateContact({ ...validMessage, phone }).errors.phone, String(phone));
+    }
+  });
+
   it('subject is optional', () => {
     const { subject, ...withoutSubject } = validMessage;
     assert.equal(subject, 'Hello');

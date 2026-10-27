@@ -269,6 +269,7 @@ export default {
     form: {
       name: 'Ad Soyad',
       email: 'E-posta',
+      phone: 'Telefon',
       subject: 'Konu',
       message: 'Mesaj',
       optional: 'isteğe bağlı',
@@ -282,6 +283,7 @@ export default {
     errors: {
       name: 'Lütfen adınızı girin (2–100 karakter).',
       email: 'Lütfen geçerli bir e-posta adresi girin.',
+      phone: 'Lütfen geçerli bir telefon numarası girin ya da boş bırakın.',
       subject: 'Konu en fazla 150 karakter olabilir.',
       message: 'Mesaj 10 ile 5000 karakter arasında olmalıdır.',
       network: 'Sunucuya ulaşılamadı. Lütfen daha sonra tekrar deneyin.',

@@ -48,7 +48,7 @@ describe('contact messages by email', () => {
   it('emails a valid message as plain text with the visitor as reply-to', async () => {
     const { status, json } = await server.request('/api/contact', {
       method: 'POST',
-      body: { ...validMessage, message: '<b>Hello</b>, I need a website.', locale: 'tr' },
+      body: { ...validMessage, phone: '+90 555 123 45 67', message: '<b>Hello</b>, I need a website.', locale: 'tr' },
     });
     assert.equal(status, 201);
     assert.deepEqual(json, { success: true, data: { received: true } });
@@ -61,6 +61,7 @@ describe('contact messages by email', () => {
     assert.equal(body.subject, 'Portfolio: Hello — Test Person');
     assert.equal(body.html, undefined);
     assert.match(body.text, /Site language: Turkish/);
+    assert.match(body.text, /Phone: \+90 555 123 45 67/);
     assert.match(body.text, /<b>Hello<\/b>, I need a website\.$/);
   });
 
@@ -69,6 +70,7 @@ describe('contact messages by email', () => {
     assert.ok(subject);
     await server.request('/api/contact', { method: 'POST', body: withoutSubject });
     assert.equal(received[0].body.subject, 'Portfolio: New message — Test Person');
+    assert.doesNotMatch(received[0].body.text, /Phone:/);
   });
 
   it('returns 503 without leaking details when the provider fails', async () => {

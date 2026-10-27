@@ -4,6 +4,7 @@ export const SUPPORTED_LOCALES = Object.freeze(['en', 'tr', 'es', 'de']);
 export const MESSAGE_LIMITS = Object.freeze({
   name: { min: 2, max: 100 },
   email: { max: 254 },
+  phone: { max: 30, minDigits: 7, maxDigits: 15 },
   subject: { max: 150 },
   message: { min: 10, max: 5000 },
 });
@@ -11,7 +12,9 @@ export const MESSAGE_LIMITS = Object.freeze({
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // Name and subject end up in the email subject line, so line breaks are not allowed there.
 const LINE_BREAK = /[\r\n]/;
-const ALLOWED_FIELDS = ['name', 'email', 'subject', 'message', 'website', 'locale'];
+// Optional; international formats like "+90 (555) 123-45 67" are accepted.
+const PHONE_PATTERN = /^\+?[\d ().-]+$/;
+const ALLOWED_FIELDS = ['name', 'email', 'phone', 'subject', 'message', 'website', 'locale'];
 
 const asTrimmedString = (value) => (typeof value === 'string' ? value.trim() : value);
 
@@ -31,13 +34,19 @@ export function validateContact(body) {
 
   const name = asTrimmedString(body.name);
   const email = asTrimmedString(body.email);
+  const phone = asTrimmedString(body.phone ?? '');
   const subject = asTrimmedString(body.subject ?? '');
   const message = asTrimmedString(body.message);
   const website = asTrimmedString(body.website ?? '');
   const locale = body.locale ?? 'en';
 
-  const { name: nameLimits, email: emailLimits, subject: subjectLimits, message: messageLimits } =
-    MESSAGE_LIMITS;
+  const {
+    name: nameLimits,
+    email: emailLimits,
+    phone: phoneLimits,
+    subject: subjectLimits,
+    message: messageLimits,
+  } = MESSAGE_LIMITS;
 
   if (
     typeof name !== 'string' ||
@@ -50,6 +59,20 @@ export function validateContact(body) {
 
   if (typeof email !== 'string' || email.length > emailLimits.max || !EMAIL_PATTERN.test(email)) {
     errors.email = 'Please provide a valid email address.';
+  }
+
+  if (typeof phone !== 'string') {
+    errors.phone = 'Please provide a valid phone number.';
+  } else if (phone) {
+    const digits = phone.replace(/\D/g, '').length;
+    if (
+      phone.length > phoneLimits.max ||
+      !PHONE_PATTERN.test(phone) ||
+      digits < phoneLimits.minDigits ||
+      digits > phoneLimits.maxDigits
+    ) {
+      errors.phone = 'Please provide a valid phone number.';
+    }
   }
 
   if (typeof subject !== 'string' || subject.length > subjectLimits.max || LINE_BREAK.test(subject)) {
@@ -70,5 +93,5 @@ export function validateContact(body) {
     errors.locale = `Locale must be one of: ${SUPPORTED_LOCALES.join(', ')}.`;
   }
 
-  return { value: { name, email, subject, message, website, locale }, errors };
+  return { value: { name, email, phone, subject, message, website, locale }, errors };
 }

@@ -270,6 +270,7 @@ export default {
     form: {
       name: 'Nombre',
       email: 'Correo electrónico',
+      phone: 'Teléfono',
       subject: 'Asunto',
       message: 'Mensaje',
       optional: 'opcional',
@@ -283,6 +284,7 @@ export default {
     errors: {
       name: 'Introduce tu nombre (2–100 caracteres).',
       email: 'Introduce una dirección de correo válida.',
+      phone: 'Introduce un número de teléfono válido o déjalo en blanco.',
       subject: 'El asunto debe tener como máximo 150 caracteres.',
       message: 'El mensaje debe tener entre 10 y 5000 caracteres.',
       network: 'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',

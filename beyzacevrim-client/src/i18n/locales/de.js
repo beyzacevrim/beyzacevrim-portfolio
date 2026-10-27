@@ -270,6 +270,7 @@ export default {
     form: {
       name: 'Name',
       email: 'E-Mail',
+      phone: 'Telefon',
       subject: 'Betreff',
       message: 'Nachricht',
       optional: 'optional',
@@ -283,6 +284,7 @@ export default {
     errors: {
       name: 'Bitte geben Sie Ihren Namen ein (2–100 Zeichen).',
       email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+      phone: 'Bitte geben Sie eine gültige Telefonnummer ein oder lassen Sie das Feld leer.',
       subject: 'Der Betreff darf höchstens 150 Zeichen lang sein.',
       message: 'Die Nachricht muss zwischen 10 und 5000 Zeichen lang sein.',
       network: 'Der Server ist nicht erreichbar. Bitte versuchen Sie es später erneut.',

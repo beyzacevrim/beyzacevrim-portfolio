@@ -3,9 +3,10 @@ import { useState } from 'react'
 import useI18n from '../hooks/useI18n.js'
 import { sendContactMessage } from '../services/contactService.js'
 
-const EMPTY = { name: '', email: '', subject: '', message: '', website: '' }
+const EMPTY = { name: '', email: '', phone: '', subject: '', message: '', website: '' }
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-const FIELDS = ['name', 'email', 'subject', 'message']
+const PHONE_PATTERN = /^\+?[\d ().-]+$/
+const FIELDS = ['name', 'email', 'phone', 'subject', 'message']
 
 // Mirrors the API rules so most mistakes are caught before a request is sent.
 // Returns the names of invalid fields; messages come from the active locale.
@@ -13,9 +14,12 @@ function findInvalidFields(values) {
   const invalid = []
   const name = values.name.trim()
   const message = values.message.trim()
+  const phone = values.phone.trim()
+  const phoneDigits = phone.replace(/\D/g, '').length
 
   if (name.length < 2 || name.length > 100) invalid.push('name')
   if (!EMAIL_PATTERN.test(values.email.trim())) invalid.push('email')
+  if (phone && (phone.length > 30 || !PHONE_PATTERN.test(phone) || phoneDigits < 7 || phoneDigits > 15)) invalid.push('phone')
   if (values.subject.trim().length > 150) invalid.push('subject')
   if (message.length < 10 || message.length > 5000) invalid.push('message')
   return invalid
@@ -76,6 +80,7 @@ export default function ContactForm() {
       await sendContactMessage({
         name: values.name.trim(),
         email: values.email.trim(),
+        phone: values.phone.trim(),
         subject: values.subject.trim(),
         message: values.message.trim(),
         website: values.website,
@@ -123,9 +128,14 @@ export default function ContactForm() {
           <input {...fieldProps('email')} type="email" className={inputClass} autoComplete="email" required />
         </Field>
       </div>
-      <Field id="subject" label={t.contact.form.subject} error={errorFor('subject')} optional={t.contact.form.optional}>
-        <input {...fieldProps('subject')} className={inputClass} />
-      </Field>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field id="phone" label={t.contact.form.phone} error={errorFor('phone')} optional={t.contact.form.optional}>
+          <input {...fieldProps('phone')} type="tel" inputMode="tel" className={inputClass} autoComplete="tel" />
+        </Field>
+        <Field id="subject" label={t.contact.form.subject} error={errorFor('subject')} optional={t.contact.form.optional}>
+          <input {...fieldProps('subject')} className={inputClass} />
+        </Field>
+      </div>
       <Field id="message" label={t.contact.form.message} error={errorFor('message')}>
         <textarea {...fieldProps('message')} rows={5} className={`${inputClass} resize-y`} placeholder={t.contact.form.placeholder} required />
       </Field>
